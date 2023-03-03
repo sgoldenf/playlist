@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:13.3
+    container_name: playlist_db
+    environment:
+      POSTGRES_DB: "playlist"
+      POSTGRES_USER: "sgoldenf"
+      POSTGRES_PASSWORD: "sgoldenf"
+    ports:
+      - "5432:5432"

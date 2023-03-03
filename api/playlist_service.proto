@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+option go_package = "github.com/sgoldenf/playlist_service";
+
+package playlist_service;
+
+message SongInfo {
+  string id = 1;
+  string title = 2;
+  uint64 duration = 3;
+}
+
+message CreateSongRequest {
+  SongInfo song = 1;
+}
+
+message CreateSongResponse {
+  SongInfo song = 1;
+}
+
+message ReadSongRequest {
+  string id = 1;
+}
+
+message ReadSongResponse {
+  SongInfo song = 1;
+}
+
+message ReadSongsRequest {
+
+}
+
+message ReadSongsResponse {
+  repeated SongInfo songs = 1;
+}
+
+message UpdateSongRequest {
+  SongInfo song = 1;
+}
+
+message UpdateSongResponse {
+  SongInfo song = 1;
+}
+
+message DeleteSongRequest {
+  string id = 1;
+}
+
+message DeleteSongResponse {
+  bool success = 1;
+}
+
+message PlayRequest {}
+
+message PlayResponse {
+  bool success = 1;
+}
+
+message PauseRequest {}
+
+message PauseResponse {
+  bool success = 1;
+}
+
+message NextSongRequest {}
+
+message NextSongResponse {
+  bool success = 1;
+}
+
+message PrevSongRequest {}
+
+message PrevSongResponse {
+  bool success = 1;
+}
+
+message PlayerInfo {
+  string title = 1;
+  uint64 duration = 2;
+  uint64 elapsed = 3;
+}
+
+message ConnectRequest {}
+
+service PlaylistService {
+  rpc CreateSong(CreateSongRequest) returns (CreateSongResponse) {};
+  rpc GetSong(ReadSongRequest) returns (ReadSongResponse) {};
+  rpc GetSongs(ReadSongsRequest) returns (ReadSongsResponse) {};
+  rpc UpdateSong(UpdateSongRequest) returns (UpdateSongResponse) {};
+  rpc DeleteSong(DeleteSongRequest) returns (DeleteSongResponse) {};
+  rpc Play(PlayRequest) returns (PlayResponse) {};
+  rpc Pause(PauseRequest) returns (PauseResponse) {};
+  rpc Next(NextSongRequest) returns (NextSongResponse) {};
+  rpc Prev(PrevSongRequest) returns (PrevSongResponse) {};
+  rpc Player(ConnectRequest) returns (stream PlayerInfo) {};
+}
